@@ -1,0 +1,111 @@
+# Allow aliases to be with sudo
+alias sudo="sudo "
+
+# Fancycat™
+alias c="pygmentize -O style=default -f console256 -g"
+
+# “What was that alias again?” Meta!
+alias aliases="c ~/.aliases/base && c ~/.aliases/work"
+
+# Copy my public key to the pasteboard
+alias pubkey="more ~/.ssh/id_rsa.pub | pbcopy | printf '=> Public key copied to pasteboard.\n'"
+
+# Easier navigation: .., ..., ~ and -
+alias ..="cd .."
+alias ...="cd ../.."
+alias ~="cd ~"
+alias -- -="cd -"
+
+# Reload profile
+alias rl=". ~/.zshrc"
+
+# Git
+alias g="git"
+alias gs="git status"
+alias ga="git add"
+alias gb="git branch"
+alias gcl="git clean -d —i"
+alias gdr="gp origin --delete $1"
+
+# Find TODO's in git commits e.g todo HEAD~2
+# uses ag ( brew install the_silver_searcher )
+todo() { git diff $1 | ag TODO; }
+
+# Delete local branch
+gdl() {
+	local branch;
+	[[ ! -z $1 ]] && branch=$1 || branch=$(git rev-parse --abbrev-ref HEAD)
+	[[ -z $1 ]] && dl
+	gb -D $branch
+}
+
+# Commit
+alias gc="~/bin/gitc.sh"
+alias gam="~/bin/gitam.sh"
+
+# Checkout
+alias ms="git checkout master"
+alias dl="git checkout develop"
+alias ck="git checkout"
+alias ckl="git checkout -"
+
+# Update
+alias ft="~/bin/gitft.sh"
+alias fa="git fetch --all"
+alias prb="git pull --rebase"
+alias pl="git pull"
+
+# Rebase current branch with develop
+alias rbd="~/bin/gitrbd.sh"
+
+# Rebase add and continue
+alias rbc="~/bin/gitrbc.sh"
+
+# Push
+alias gp="git push"
+alias gpf="git push -f"
+
+# GitFlow
+alias gfs="git flow feature start"
+alias gfp="git flow feature publish"
+
+# Reset previous commit, but keep all the associated changes.
+alias goddammit="git reset --soft HEAD^"
+
+# Welp.
+alias fuckit="git reset --hard HEAD"
+
+# Directories
+alias dsk="~/desktop"
+alias pro="~/dropbox/projects"
+
+# Docker
+alias dm="docker-machine"
+alias dms="dm start default"
+alias dmsp="dm stop default"
+alias dmr="dm rm -f default"
+alias dip="dm ip default"
+alias drl="denv && rl"
+alias dmsl="dms && sleep 5 && drl"
+alias dps="docker ps"
+
+# Get Docker Environment
+denv () { eval $(dm env default) }
+
+# Vagrant
+alias vg="cd /vagrant"
+alias vu="vagrant up"
+alias vd="vagrand destroy"
+alias vh="vagrant halt"
+alias vs="vagrant ssh"
+alias vrp="vagrant reload --provision"
+
+# Grunt
+alias gr="grunt"
+alias grd="grunt dev"
+alias grw="grunt watch"
+alias gk="grunt karma:ci"
+alias gkd="grunt karma:dev"
+
+# Python
+alias py="python3"

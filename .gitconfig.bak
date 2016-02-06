@@ -1,0 +1,11 @@
+[user]
+	email = pxlhero@users.noreply.github.com
+	name = pxlhero
+[push]
+	default = current
+[credential]
+	helper = cache
+[alias]
+	mylog = !git log --author=\"$(git config user.name)\"
+[core]
+	excludesfile = /Users/$USER/.gitignore_global
