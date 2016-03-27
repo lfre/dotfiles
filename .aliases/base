@@ -31,14 +31,6 @@ alias gdr="gp origin --delete $1"
 # uses ag ( brew install the_silver_searcher )
 todo() { git diff $1 | ag TODO; }
 
-# Delete local branch
-gdl() {
-	local branch;
-	[[ ! -z $1 ]] && branch=$1 || branch=$(git rev-parse --abbrev-ref HEAD)
-	[[ -z $1 ]] && dl
-	gb -D $branch
-}
-
 # Commit
 alias gc="~/bin/gitc.sh"
 alias gam="~/bin/gitam.sh"
@@ -65,6 +57,21 @@ alias rbc="~/bin/gitrbc.sh"
 alias gp="git push"
 alias gpf="git push -f"
 
+# Delete local branch
+gdl() {
+	local branch;
+	[[ ! -z $1 ]] && branch=$1 || branch=$(git rev-parse --abbrev-ref HEAD)
+	[[ -z $1 ]] && dl
+	gb -D $branch
+}
+
+# Delete remote branch
+gdlr() {
+	local branch;
+	[[ ! -z $1 ]] && branch=$1 || branch=$(git rev-parse --abbrev-ref HEAD)
+	gp origin --delete $branch
+}
+
 # GitFlow
 alias gfs="git flow feature start"
 alias gfp="git flow feature publish"
@@ -80,17 +87,37 @@ alias dsk="~/desktop"
 alias pro="~/dropbox/projects"
 
 # Docker
+alias dps="docker ps"
+
+# Docker shell
+dsh () { docker exec -it $1 bash }
+
+# Docker Machine
 alias dm="docker-machine"
 alias dms="dm start default"
 alias dmsp="dm stop default"
 alias dmr="dm rm -f default"
 alias dip="dm ip default"
-alias drl="denv && rl"
-alias dmsl="dms && sleep 5 && drl"
-alias dps="docker ps"
 
 # Get Docker Environment
 denv () { eval $(dm env default) }
+
+# Docker Compose
+alias dc="docker-compose"
+alias dcs="dc start"
+alias dcsp="dc stop"
+alias dck="dc kill"
+alias dcl="dc logs"
+alias dcps="dc ps"
+
+# Dinghy
+alias dg="dinghy"
+alias dgs="dg up"
+alias dgh="dg halt"
+alias dgd="dg destroy"
+
+# Get Dingy Environment
+dgenv () { eval $(dg shellinit) }
 
 # Vagrant
 alias vg="cd /vagrant"
