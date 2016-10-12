@@ -25,7 +25,6 @@ alias gs="git status"
 alias ga="git add"
 alias gb="git branch"
 alias gcl="git clean -d —i"
-alias gdr="gp origin --delete $1"
 
 # Find TODO's in git commits e.g todo HEAD~2
 # uses ag ( brew install the_silver_searcher )
@@ -47,8 +46,9 @@ alias fa="git fetch --all"
 alias prb="git pull --rebase"
 alias pl="git pull"
 
-# Rebase current branch with develop
+# Rebase current branch with develop or master
 alias rbd="~/bin/gitrbd.sh"
+alias rbm="~/bin/gitrbm.sh"
 
 # Rebase add and continue
 alias rbc="~/bin/gitrbc.sh"

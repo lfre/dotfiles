@@ -9,32 +9,11 @@ alias hdm="~/mediaos/mp/fre/themes/hdm"
 alias ftb="~/mediaos/mp/feed-the-beast"
 alias mpb="~/mediaos/mp/mp-bower-assets"
 
-# Docker
-alias dbuild="./bin/docker/build"
-alias dstart="./bin/docker/start"
-alias drestart="./bin/docker/restart"
-alias dstop="./bin/docker/stop"
-alias dstop_redis="./bin/docker/stop_redis"
-alias dstop_postgres="./bin/docker/stop_postgres"
-alias dsetup="./bin/docker/setup"
-alias dshell="./bin/docker/shell"
-
 # Codeception
 alias cpt="../vendor/bin/codecept build"
 alias crun="../vendor/bin/codecept run -vvv"
 alias ccov="../vendor/bin/codecept run -vvv --coverage --coverage-html && sleep 3 && ocov"
 alias ocov="open -a 'Google Chrome' codeception/_output/coverage/index.html"
-
-# ngrok
-ngr () {
-	local port;
-	if [[ $1 == mpe ]]; then
-		port=":32776"
-	elif [[ $1 == fre ]]; then
-		port=":32772"
-	fi
-	[[ ! -z $port ]] && ngrok http $(dip)$port || echo "missing key [ mpe/fre ]"
-}
 
 # Grunt
 alias gcos="gr --theme hdm --site cosmopolitan"
