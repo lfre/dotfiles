@@ -88,7 +88,7 @@ export PATH
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
-echo "-------------------"
-echo "  ☑ GET SHIT DONE  "
-echo "-------------------"
+echo "---------------"
+echo "  GET 💩  DONE  "
+echo "---------------"
 
