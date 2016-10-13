@@ -57,11 +57,18 @@ alias rbc="~/bin/gitrbc.sh"
 alias gp="git push"
 alias gpf="git push -f"
 
+# Create branch from master or other branch
+ckb() {
+	local branch;
+	[[ ! -z $2 ]] && branch=$2 || branch=master
+	git checkout -b $1 origin/$branch
+}
+
 # Delete local branch
 gdl() {
 	local branch;
 	[[ ! -z $1 ]] && branch=$1 || branch=$(git rev-parse --abbrev-ref HEAD)
-	[[ -z $1 ]] && dl
+	[[ -z $1 ]] && ms
 	gb -D $branch
 }
 
@@ -70,6 +77,12 @@ gdlr() {
 	local branch;
 	[[ ! -z $1 ]] && branch=$1 || branch=$(git rev-parse --abbrev-ref HEAD)
 	gp origin --delete $branch
+}
+
+# Track remote branch
+gbu() {
+	local branch=$(git rev-parse --abbrev-ref HEAD)
+	gb -u origin/$branch
 }
 
 # GitFlow
