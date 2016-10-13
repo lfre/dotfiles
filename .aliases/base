@@ -19,6 +19,14 @@ alias -- -="cd -"
 # Reload profile
 alias rl=". ~/.zshrc"
 
+# Show/hide invisible files
+files=0;
+
+inv() {
+	[[ $files = 0 ]] && files=1 || files=0
+	defaults write com.apple.finder AppleShowAllFiles $files; killall Finder /System/Library/CoreServices/Finder.app
+}
+
 # Git
 alias g="git"
 alias gs="git status"
