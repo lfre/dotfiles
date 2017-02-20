@@ -1,6 +1,6 @@
 #!/bin/bash
 MYCURRENTGITBRANCH=$(git rev-parse --abbrev-ref HEAD)
-git checkout develop && \
+git checkout master && \
 git pull && \
 git checkout $MYCURRENTGITBRANCH && \
-git rebase develop
+git rebase master
