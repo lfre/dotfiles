@@ -13,11 +13,22 @@ alias pubkey="more ~/.ssh/id_rsa.pub | pbcopy | printf '=> Public key copied to 
 # Easier navigation: .., ..., ~ and -
 alias ..="cd .."
 alias ...="cd ../.."
+alias ....="cd ../../.."
+alias .....="cd ../../../.."
 alias ~="cd ~"
 alias -- -="cd -"
 
 # Reload profile
 alias rl=". ~/.zshrc"
+
+# update profile
+alias ezsh="subl $HOME/.zshrc"
+
+# Print each PATH entry on a separate line
+alias path="echo -e ${PATH//:/\\n}"
+
+# Lock the screen
+alias afk="/System/Library/CoreServices/Menu\ Extras/User.menu/Contents/Resources/CGSession -suspend"
 
 # Show/hide invisible files
 files=0;
@@ -27,16 +38,58 @@ inv() {
 	defaults write com.apple.finder AppleShowAllFiles $files; killall Finder /System/Library/CoreServices/Finder.app
 }
 
+# URL-encode strings
+alias urlencode="python -c 'import sys, urllib as ul; print ul.quote_plus(sys.argv[1]);'"
+
+# Merge PDF files
+# Usage: `mpdf -o output.pdf input{1,2,3}.pdf`
+alias mpdf="/System/Library/Automator/Combine\ PDF\ Pages.action/Contents/Resources/join.py"
+
+# Recursively delete `.DS_Store` files
+alias cleanupds="find . -type f -name '*.DS_Store' -ls -delete"
+
+# Empty the Trash on all mounted volumes and the main HDD.
+# Also, clear Apple’s System Logs to improve shell startup speed.
+# Finally, clear download history from quarantine. https://mths.be/bum
+alias emptytrash="sudo rm -rfv /Volumes/*/.Trashes; sudo rm -rfv ~/.Trash; sudo rm -rfv /private/var/log/asl/*.asl; sqlite3 ~/Library/Preferences/com.apple.LaunchServices.QuarantineEventsV* 'delete from LSQuarantineEvent'"
+
+# Detect which `ls` flavor is in use
+if ls --color > /dev/null 2>&1; then # GNU `ls`
+	colorflag="--color"
+	export LS_COLORS='no=00:fi=00:di=01;31:ln=01;36:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arj=01;31:*.taz=01;31:*.lzh=01;31:*.zip=01;31:*.z=01;31:*.Z=01;31:*.gz=01;31:*.bz2=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.jpg=01;35:*.jpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.avi=01;35:*.fli=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.ogg=01;35:*.mp3=01;35:*.wav=01;35:'
+else # macOS `ls`
+	colorflag="-G"
+	export LSCOLORS='BxBxhxDxfxhxhxhxhxcxcx'
+fi
+
+# List all files colorized in long format
+alias l="ls -lF ${colorflag}"
+
+# List all files colorized in long format, including dot files
+alias la="ls -laF ${colorflag}"
+
+# List only directories
+alias lsd="ls -lF ${colorflag} | grep --color=never '^d'"
+
+# Always use color output for `ls`
+alias ls="command ls ${colorflag}"
+
+# Always enable colored `grep` output
+# Note: `GREP_OPTIONS="--color=auto"` is deprecated, hence the alias usage.
+alias grep="grep --color=auto"
+alias fgrep="fgrep --color=auto"
+alias egrep="egrep --color=auto"
+
+# Find TODO's in git commits e.g todo HEAD~2
+# uses ag ( brew install the_silver_searcher )
+todo() { git diff $1 | ag TODO; }
+
 # Git
 alias g="git"
 alias gs="git status"
 alias ga="git add"
 alias gb="git branch"
 alias gcl="git clean -d —i"
-
-# Find TODO's in git commits e.g todo HEAD~2
-# uses ag ( brew install the_silver_searcher )
-todo() { git diff $1 | ag TODO; }
 
 # Commit
 alias gc="~/bin/gitc.sh"
@@ -87,6 +140,9 @@ gdlr() {
 	gp origin --delete $branch
 }
 
+# Delete remote then local current branch
+alias gdel="gdlr && gdl"
+
 # Track remote branch
 gbu() {
 	local branch=$(git rev-parse --abbrev-ref HEAD)
@@ -113,6 +169,9 @@ alias dps="docker ps"
 # Docker shell
 dsh () { docker exec -it $1 bash }
 
+# Docker exec
+alias dex="docker exec -it"
+
 # Docker Machine
 alias dm="docker-machine"
 alias dms="dm start default"
@@ -125,6 +184,9 @@ denv () { eval $(dm env default) }
 
 # Docker Compose
 alias dc="docker-compose"
+alias dcb="dc build --no-cache"
+alias dcu="dc up"
+alias dcd="dc down"
 alias dcs="dc start"
 alias dcsp="dc stop"
 alias dck="dc kill"
@@ -140,6 +202,10 @@ alias dgd="dg destroy"
 # Get Dingy Environment
 dgenv () { eval $(dg shellinit) }
 
+# Docker cleanup
+alias dimagescl="docker rmi $(docker images -f 'dangling=true' -q)"
+alias dvolumescl="docker volume rm $(docker volume ls -qf dangling=true)"
+
 # Vagrant
 alias vg="cd /vagrant"
 alias vu="vagrant up"
@@ -154,6 +220,9 @@ alias grd="grunt dev"
 alias grw="grunt watch"
 alias gk="grunt karma:ci"
 alias gkd="grunt karma:dev"
+
+# Make Grunt print stack traces by default
+command -v grunt > /dev/null && alias grunt="grunt --stack"
 
 # Python
 alias py="python3"

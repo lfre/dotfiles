@@ -4,10 +4,10 @@ alias mp="~/mediaos/mp"
 alias mpe="~/mediaos/mp/edit"
 alias fre="~/mediaos/mp/fre"
 alias rv="~/mediaos/mp/rover"
-alias drm="~/mediaos/mp/doorman"
 alias hdm="~/mediaos/mp/fre/themes/hdm"
 alias ftb="~/mediaos/mp/feed-the-beast"
 alias mpb="~/mediaos/mp/mp-bower-assets"
+alias ycc="~/mediaos/mp/yii2-corecomponets"
 
 # Codeception
 alias cpt="../vendor/bin/codecept build"
@@ -21,3 +21,9 @@ alias gdcos="grb --theme hdm --site cosmopolitan"
 alias gwcos="grw --theme hdm --site cosmopolitan"
 alias gkcos="gk --theme hdm --site cosmopolitan"
 alias gkdcos="gkd --theme hdm --site cosmopolitan"
+
+# Grunt watch hdm
+alias gwhdm="grw --theme hdm"
+
+# Grunt karma unit
+alias gku="grunt karma:unit --theme hdm --file"
