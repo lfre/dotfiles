@@ -93,7 +93,8 @@ alias gcl="git clean -d —i"
 
 # Commit
 alias gc="~/bin/gitc.sh"
-alias gam="~/bin/gitam.sh"
+alias gam="git add . && git commit --amend --no-edit"
+alias gamed="git add . && git commit --amend"
 
 # Checkout
 alias ms="git checkout master"
@@ -102,17 +103,16 @@ alias ck="git checkout"
 alias ckl="git checkout -"
 
 # Update
-alias ft="~/bin/gitft.sh"
+alias ft="git fetch $(git rev-parse --symbolic-full-name --abbrev-ref @{upstream} | sed 's!/! !')"
 alias fa="git fetch --all"
 alias prb="git pull --rebase"
 alias pl="git pull"
 
-# Rebase current branch with develop or master
-alias rbd="~/bin/gitrbd.sh"
-alias rbm="~/bin/gitrbm.sh"
+# Rebase current branch with master
+alias rbm="git checkout master && git pull && git checkout $(git rev-parse --abbrev-ref HEAD) && git rebase master"
 
 # Rebase add and continue
-alias rbc="~/bin/gitrbc.sh"
+alias rbc="git add . && git rebase --continue"
 
 # Push
 alias gp="git push"
@@ -144,10 +144,7 @@ gdlr() {
 alias gdel="gdlr && gdl"
 
 # Track remote branch
-gbu() {
-	local branch=$(git rev-parse --abbrev-ref HEAD)
-	gb -u origin/$branch
-}
+alias gbu="gb -u origin/$(git rev-parse --abbrev-ref HEAD)"
 
 # GitFlow
 alias gfs="git flow feature start"
@@ -203,8 +200,8 @@ alias dgd="dg destroy"
 dgenv () { eval $(dg shellinit) }
 
 # Docker cleanup
-alias dimagescl="docker rmi $(docker images -f 'dangling=true' -q)"
-alias dvolumescl="docker volume rm $(docker volume ls -qf dangling=true)"
+alias dimagescl='docker rmi $(docker images -f "dangling=true" -q)'
+alias dvolumescl='docker volume rm $(docker volume ls -qf dangling=true)'
 
 # Vagrant
 alias vg="cd /vagrant"
