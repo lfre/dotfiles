@@ -108,8 +108,13 @@ alias fa="git fetch --all"
 alias prb="git pull --rebase"
 alias pl="git pull"
 
-# Rebase current branch with master
-alias rbm="git checkout master && git pull && git checkout $(git rev-parse --abbrev-ref HEAD) && git rebase master"
+# Rebase current branch with a base branch
+rb() {
+	local base;
+	local branch=$(git rev-parse --abbrev-ref HEAD);
+	[[ ! -z $1 ]] && base=$1 || base=master
+	git checkout $base && git pull && git checkout $branch && git rebase $base
+}
 
 # Rebase add and continue
 alias rbc="git add . && git rebase --continue"
