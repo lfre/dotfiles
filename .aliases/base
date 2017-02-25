@@ -38,8 +38,11 @@ inv() {
 	defaults write com.apple.finder AppleShowAllFiles $files; killall Finder /System/Library/CoreServices/Finder.app
 }
 
-# URL-encode strings
-alias urlencode="python -c 'import sys, urllib as ul; print ul.quote_plus(sys.argv[1]);'"
+# URL-encode strings ( prints and copies to clipboard )
+urlencode() {
+	local url=$( python -c "import sys, urllib as ul; print ul.quote_plus('"$1"');" 2>&1 );
+	echo $url && echo $url | pbcopy
+}
 
 # Merge PDF files
 # Usage: `mpdf -o output.pdf input{1,2,3}.pdf`
@@ -149,7 +152,10 @@ gdlr() {
 alias gdel="gdlr && gdl"
 
 # Track remote branch
-alias gbu="gb -u origin/$(git rev-parse --abbrev-ref HEAD)"
+gbu() {
+	local branch=$(git rev-parse --abbrev-ref HEAD);
+	gb -u origin/$branch
+}
 
 # GitFlow
 alias gfs="git flow feature start"
