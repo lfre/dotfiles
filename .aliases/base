@@ -27,8 +27,8 @@ alias ezsh="subl $HOME/.zshrc"
 # Print each PATH entry on a separate line
 alias path="echo -e ${PATH//:/\\n}"
 
-# Lock the screen
-alias afk="/System/Library/CoreServices/Menu\ Extras/User.menu/Contents/Resources/CGSession -suspend"
+# Set the display to sleep to lock computer
+alias afk="pmset displaysleepnow"
 
 # Show/hide invisible files
 files=0;
