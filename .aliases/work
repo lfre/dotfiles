@@ -27,3 +27,6 @@ alias gwhdm="grw --theme hdm"
 
 # Grunt karma unit
 alias gku="grunt karma:unit --theme hdm --file"
+
+# Bump version
+alias bump="~/MediaOS/release/scripts/bash/bump-version.sh"
