@@ -1,5 +1,6 @@
 
 # Directories
+alias mos="~/mediaos"
 alias mp="~/mediaos/mp"
 alias mpe="~/mediaos/mp/edit"
 alias fre="~/mediaos/mp/fre"
@@ -7,7 +8,7 @@ alias rv="~/mediaos/mp/rover"
 alias hdm="~/mediaos/mp/fre/themes/hdm"
 alias ftb="~/mediaos/mp/feed-the-beast"
 alias mpb="~/mediaos/mp/mp-bower-assets"
-alias ycc="~/mediaos/mp/yii2-corecomponets"
+alias ycc="~/mediaos/mp/yii2-corecomponents"
 
 # Codeception
 alias cpt="../vendor/bin/codecept build"
