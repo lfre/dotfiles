@@ -38,6 +38,14 @@ inv() {
 	defaults write com.apple.finder AppleShowAllFiles $files; killall Finder /System/Library/CoreServices/Finder.app
 }
 
+# Show/hide desktop
+desktop=0;
+
+desk() {
+	[[ $desktop = 0 ]] && desktop=1 || desktop=0
+	defaults write com.apple.finder CreateDesktop $desktop; killall Finder /System/Library/CoreServices/Finder.app
+}
+
 # URL-encode strings ( prints and copies to clipboard )
 urlencode() {
 	local url=$( python -c "import sys, urllib as ul; print ul.quote_plus('"$1"');" 2>&1 );
