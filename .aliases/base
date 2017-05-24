@@ -97,6 +97,9 @@ todo() { git diff $1 | ag TODO; }
 
 # Git
 alias g="git"
+alias such="git"
+alias very="git"
+alias wow="git status"
 alias gs="git status"
 alias ga="git add"
 alias gb="git branch"
