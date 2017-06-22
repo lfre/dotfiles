@@ -159,8 +159,12 @@ gdlr() {
 	gp origin --delete $branch
 }
 
-# Delete remote then local current branch
-alias gdel="gdlr && gdl"
+# Delete local then remove current branch
+gdel() {
+	local branch;
+	[[ ! -z $1 ]] && branch=$1 || branch=$(git rev-parse --abbrev-ref HEAD)
+	gdl $branch && gdlr $branch
+}
 
 # Track remote branch
 gbu() {
