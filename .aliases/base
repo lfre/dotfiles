@@ -249,3 +249,7 @@ command -v grunt > /dev/null && alias grunt="grunt --stack"
 
 # Python
 alias py="python3"
+
+$ PHP
+alias php="php -dzend_extension=/usr/local/opt/php70-xdebug/xdebug.so"
+alias phpunit="php $(which phpunit)"

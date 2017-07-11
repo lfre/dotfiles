@@ -13,9 +13,9 @@ alias ycc="~/mediaos/mp/yii2-corecomponents"
 alias yrr="~/mediaos/mp/yii2-restfulrecord"
 
 # Codeception
-alias cpt="../vendor/bin/codecept build"
-alias crun="../vendor/bin/codecept run -vvv"
-alias ccov="../vendor/bin/codecept run -vvv --coverage --coverage-html && sleep 3 && ocov"
+alias cpt="php ../vendor/bin/codecept build"
+alias crun="php ../vendor/bin/codecept run -vvv"
+alias ccov="php ../vendor/bin/codecept run -vvv --coverage --coverage-html && sleep 3 && ocov"
 alias ocov="open -a 'Google Chrome' codeception/_output/coverage/index.html"
 
 # Grunt
