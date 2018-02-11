@@ -3,6 +3,10 @@
 *.sublime-project
 *.sublime-workspace
 
+# VSCode
+###################
+*.vscode
+
 # Compiled source #
 ###################
 *.com
