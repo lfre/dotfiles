@@ -190,7 +190,7 @@ alias pro="~/dropbox/projects"
 alias dps="docker ps"
 
 # Docker shell
-dsh () { docker exec -it $1 bash }
+dsh () { docker exec -it $1 sh }
 
 # Docker exec
 alias dex="docker exec -it"
