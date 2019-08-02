@@ -6,6 +6,11 @@
 # VSCode
 ###################
 *.vscode
+jsconfig.json
+
+# Node
+###################
+node_modules
 
 # Compiled source #
 ###################
