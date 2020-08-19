@@ -177,7 +177,7 @@ alias gfs="git flow feature start"
 alias gfp="git flow feature publish"
 
 # Reset previous commit, but keep all the associated changes.
-alias goddammit="git reset --soft HEAD^"
+alias ugh="git reset --soft HEAD^"
 
 # Welp.
 alias fuckit="git reset --hard HEAD"
