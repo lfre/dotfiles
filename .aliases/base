@@ -247,6 +247,9 @@ alias gkd="grunt karma:dev"
 # Make Grunt print stack traces by default
 command -v grunt > /dev/null && alias grunt="grunt --stack"
 
+# NPM
+alias ns="npm start"
+
 # Python
 alias py="python3"
 
