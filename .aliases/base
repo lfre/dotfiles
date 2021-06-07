@@ -111,8 +111,7 @@ alias gam="git add . && git commit --amend --no-edit"
 alias gamed="git add . && git commit --amend"
 
 # Checkout
-alias ms="git checkout master"
-alias dl="git checkout develop"
+alias ms="git checkout $(git symbolic-ref refs/remotes/origin/HEAD | sed 's@^refs/remotes/origin/@@')"
 alias ck="git checkout"
 alias ckl="git checkout -"
 
@@ -140,7 +139,7 @@ alias gpf="git push -f"
 # Create branch from master or other branch
 ckb() {
 	local branch;
-	[[ ! -z $2 ]] && branch=$2 || branch=master
+	[[ ! -z $2 ]] && branch=$2 || branch=$(git symbolic-ref refs/remotes/origin/HEAD | sed 's@^refs/remotes/origin/@@')
 	git checkout -b $1 origin/$branch
 }
 
