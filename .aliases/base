@@ -125,7 +125,7 @@ alias pl="git pull"
 rb() {
 	local base;
 	local branch=$(git rev-parse --abbrev-ref HEAD);
-	[[ ! -z $1 ]] && base=$1 || base=master
+	[[ ! -z $1 ]] && base=$1 || base=$(git symbolic-ref refs/remotes/origin/HEAD | sed 's@^refs/remotes/origin/@@')
 	git checkout $base && git pull && git checkout $branch && git rebase $base
 }
 
