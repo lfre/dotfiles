@@ -194,18 +194,11 @@ dsh () { docker exec -it $1 sh }
 # Docker exec
 alias dex="docker exec -it"
 
-# Docker Machine
-alias dm="docker-machine"
-alias dms="dm start default"
-alias dmsp="dm stop default"
-alias dmr="dm rm -f default"
-alias dip="dm ip default"
-
 # Get Docker Environment
 denv () { eval $(dm env default) }
 
 # Docker Compose
-alias dc="docker-compose"
+alias dc="docker compose"
 alias dcb="dc build --no-cache"
 alias dcu="dc up"
 alias dcd="dc down"
