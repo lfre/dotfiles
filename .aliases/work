@@ -1,35 +1,12 @@
 
 # Directories
 alias mos="~/mediaos"
-alias ahb="~/mediaos/ahab"
 alias mp="~/mediaos/mp"
 alias mpe="~/mediaos/mp/edit"
 alias fre="~/mediaos/mp/fre"
-alias rv="~/mediaos/mp/rover"
 alias hdm="~/mediaos/mp/fre-hdm"
-alias ftb="~/mediaos/mp/feed-the-beast"
-alias mpb="~/mediaos/mp/mp-bower-assets"
 alias ycc="~/mediaos/mp/yii2-corecomponents"
 alias yrr="~/mediaos/mp/yii2-restfulrecord"
-
-# Codeception
-alias cpt="php ../vendor/bin/codecept build"
-alias crun="php ../vendor/bin/codecept run -vvv"
-alias ccov="php ../vendor/bin/codecept run -vvv --coverage --coverage-html && sleep 3 && ocov"
-alias ocov="open -a 'Google Chrome' codeception/_output/coverage/index.html"
-
-# Grunt
-alias gcos="gr --theme hdm --site cosmopolitan"
-alias gdcos="grb --theme hdm --site cosmopolitan"
-alias gwcos="grw --theme hdm --site cosmopolitan"
-alias gkcos="gk --theme hdm --site cosmopolitan"
-alias gkdcos="gkd --theme hdm --site cosmopolitan"
-
-# Grunt watch hdm
-alias gwhdm="grw --theme hdm"
-
-# Grunt karma unit
-alias gku="grunt karma:unit --theme hdm --file"
 
 # Update nginx
 nconf () { dex $1 cp etc/nginx.conf /etc && dc restart $1 }
