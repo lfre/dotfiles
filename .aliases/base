@@ -194,9 +194,6 @@ dsh () { docker exec -it $1 sh }
 # Docker exec
 alias dex="docker exec -it"
 
-# Get Docker Environment
-denv () { eval $(dm env default) }
-
 # Docker Compose
 alias dc="docker compose"
 alias dcb="dc build --no-cache"
@@ -208,39 +205,13 @@ alias dck="dc kill"
 alias dcl="dc logs"
 alias dcps="dc ps"
 
-# Dinghy
-alias dg="dinghy"
-alias dgs="dg up"
-alias dgh="dg halt"
-alias dgd="dg destroy"
-
-# Get Dingy Environment
-dgenv () { eval $(dg shellinit) }
-
 # Docker cleanup
 alias dimagescl='docker rmi $(docker images -f "dangling=true" -q)'
 alias dvolumescl='docker volume rm $(docker volume ls -qf dangling=true)'
 
-# Vagrant
-alias vg="cd /vagrant"
-alias vu="vagrant up"
-alias vd="vagrand destroy"
-alias vh="vagrant halt"
-alias vs="vagrant ssh"
-alias vrp="vagrant reload --provision"
-
-# Grunt
-alias gr="grunt"
-alias grd="grunt dev"
-alias grw="grunt watch"
-alias gk="grunt karma:ci"
-alias gkd="grunt karma:dev"
-
-# Make Grunt print stack traces by default
-command -v grunt > /dev/null && alias grunt="grunt --stack"
-
 # NPM
 alias ns="npm start"
+alias nd="npm run dev"
 
 # Python
 alias py="python3"
