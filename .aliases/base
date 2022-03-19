@@ -105,18 +105,28 @@ alias ga="git add"
 alias gb="git branch"
 alias gcl="git clean -d —i"
 
+defaultBranch() {
+	git symbolic-ref refs/remotes/origin/HEAD | sed 's@^refs/remotes/origin/@@'
+}
+
 # Commit
 alias gc="~/bin/gitc.sh"
 alias gam="git add . && git commit --amend --no-edit"
 alias gamed="git add . && git commit --amend"
 
 # Checkout
-alias ms="git checkout $(git symbolic-ref refs/remotes/origin/HEAD | sed 's@^refs/remotes/origin/@@')"
+ms() {
+ git checkout $(defaultBranch)
+}
+
 alias ck="git checkout"
 alias ckl="git checkout -"
 
 # Update
-alias ft="git fetch $(git rev-parse --symbolic-full-name --abbrev-ref @{upstream} | sed 's!/! !')"
+ft() {
+	git fetch $(defaultBranch)
+}
+
 alias fa="git fetch --all"
 alias prb="git pull --rebase"
 alias pl="git pull"
@@ -125,7 +135,7 @@ alias pl="git pull"
 rb() {
 	local base;
 	local branch=$(git rev-parse --abbrev-ref HEAD);
-	[[ ! -z $1 ]] && base=$1 || base=$(git symbolic-ref refs/remotes/origin/HEAD | sed 's@^refs/remotes/origin/@@')
+	[[ ! -z $1 ]] && base=$1 || base=$(defaultBranch)
 	git checkout $base && git pull && git checkout $branch && git rebase $base
 }
 
@@ -139,7 +149,7 @@ alias gpf="git push -f"
 # Create branch from master or other branch
 ckb() {
 	local branch;
-	[[ ! -z $2 ]] && branch=$2 || branch=$(git symbolic-ref refs/remotes/origin/HEAD | sed 's@^refs/remotes/origin/@@')
+	[[ ! -z $2 ]] && branch=$2 || branch=$(defaultBranch)
 	git checkout -b $1 origin/$branch
 }
 
@@ -170,10 +180,6 @@ gbu() {
 	local branch=$(git rev-parse --abbrev-ref HEAD);
 	gb -u origin/$branch
 }
-
-# GitFlow
-alias gfs="git flow feature start"
-alias gfp="git flow feature publish"
 
 # Reset previous commit, but keep all the associated changes.
 alias ugh="git reset --soft HEAD^"
