@@ -1,12 +1,7 @@
 
 # Directories
-alias mos="~/mediaos"
-alias mp="~/mediaos/mp"
-alias mpe="~/mediaos/mp/edit"
-alias fre="~/mediaos/mp/fre"
-alias hdm="~/mediaos/mp/fre-hdm"
-alias ycc="~/mediaos/mp/yii2-corecomponents"
-alias yrr="~/mediaos/mp/yii2-restfulrecord"
+alias mp="~/media-platforms"
+alias fre="~/media-platforms/fre"
 
 # Update nginx
 nconf () { dex $1 cp etc/nginx.conf /etc && dc restart $1 }
