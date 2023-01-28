@@ -1,7 +1,7 @@
 
 # Directories
 alias mp="~/media-platform"
-alias fre="~/media-platform/fre"
+alias fre="~/media-platform/services/fre"
 
 # Update nginx
 nconf () { dex $1 cp etc/nginx.conf /etc && dc restart $1 }
