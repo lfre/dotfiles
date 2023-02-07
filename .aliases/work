@@ -1,6 +1,6 @@
 
 # Directories
-alias mp="~/media-platform"
+alias mp="~/media-platform/services"
 alias fre="~/media-platform/services/fre"
 
 # Update nginx
