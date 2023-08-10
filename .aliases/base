@@ -154,7 +154,7 @@ ckb() {
 }
 
 # Delete local branch
-gdlc() {
+gdl() {
 	local branch;
 	[[ ! -z $1 ]] && branch=$1 || branch=$(git rev-parse --abbrev-ref HEAD)
 	[[ -z $1 ]] && ms
@@ -169,10 +169,10 @@ gdlr() {
 }
 
 # Delete local then remove current branch
-gdl() {
+gdln() {
 	local branch;
 	[[ ! -z $1 ]] && branch=$1 || branch=$(git rev-parse --abbrev-ref HEAD)
-	gdlc $branch && gdlr $branch
+	gdl && gdlr $branch
 }
 
 # Track remote branch
