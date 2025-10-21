@@ -5,3 +5,47 @@ alias fre="~/media-platform/services/fre"
 
 # Update nginx
 nconf () { dex $1 cp etc/nginx.conf /etc && dc restart $1 }
+
+# Identity Center Profile
+aso() {
+  PROFILE_TO_USE=$1
+
+  if [ -z "$PROFILE_TO_USE" ]; then
+    echo "Available AWS profiles:"
+    profiles=($(grep -E '^\[profile ' ~/.aws/config | sed -E 's/\[profile (.*)\]/\1/'))
+
+    if [ ${#profiles[@]} -eq 0 ]; then
+      echo "No profiles found in ~/.aws/config"
+      return 1
+    fi
+
+    local count=1
+    for profile in "${profiles[@]}"; do
+      echo "$count. $profile"
+      count=$((count + 1))
+    done
+
+    echo -n "Select a profile (1-${#profiles[@]}): "
+    read selection
+
+    if [[ "$selection" =~ ^[0-9]+$ ]] && [ "$selection" -ge 1 ] && [ "$selection" -le "${#profiles[@]}" ]; then
+      PROFILE_TO_USE="${profiles[$((selection))]}"
+      echo "Selected profile: $PROFILE_TO_USE"
+    else
+      echo "Invalid selection. Exiting."
+      return 1
+    fi
+  fi
+
+  if [ -z "$PROFILE_TO_USE" ]; then
+    echo "Error: No profile selected"
+    return 1
+  fi
+
+  echo "Logging in with profile: $PROFILE_TO_USE"
+  aws sso login --profile "$PROFILE_TO_USE" && export AWS_DEFAULT_PROFILE=$PROFILE_TO_USE && eval "$(aws configure export-credentials --profile "$PROFILE_TO_USE" --format env)"
+}
+
+asl() {
+    grep -E '^\[profile ' ~/.aws/config | sed -E 's/\[profile (.*)\]/\1/'
+}
