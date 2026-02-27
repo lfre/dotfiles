@@ -218,6 +218,9 @@ alias dvolumescl='docker volume rm $(docker volume ls -qf dangling=true)'
 # NPM
 alias ns="npm start"
 alias nd="npm run dev"
+alias nb="npm run build"
+alias nt="npm run test"
+alias nl="npm run lint"
 
 # Python
 alias py="python3"
