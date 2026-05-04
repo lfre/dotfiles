@@ -8,6 +8,9 @@
 *.vscode
 jsconfig.json
 
+# Zed
+.zed
+
 # Node
 ###################
 node_modules
