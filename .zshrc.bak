@@ -1,37 +1,48 @@
-# Path to your oh-my-zsh installation.
 export ZSH=$HOME/.oh-my-zsh
 
-# Set name of the theme to load.
-# Look in ~/.oh-my-zsh/themes/
 ZSH_THEME="agnoster"
 
-# Display red dots whilst waiting for completion.
 COMPLETION_WAITING_DOTS="true"
 
-# Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
-# Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
-# Example format: plugins=(rails git textmate ruby lighthouse)
-# Add wisely, as too many plugins slow down shell startup.
-plugins=(git)
+plugins=(git npm github you-should-use zsh-syntax-highlighting zsh-autosuggestions)
 
 source $ZSH/oh-my-zsh.sh
-source $HOME/.zprofile
 source $HOME/.aliases/base
 source $HOME/.aliases/work
 
-# User configuration
+export N_PREFIX="$HOME/.local"
+export PREFIX="$HOME/.local"
+export PNPM_HOME="$HOME/Library/pnpm"
+
+export SSH_AUTH_SOCK=~/Library/Group\ Containers/2BUA8C4S2C.com.1password/t/agent.sock
 
 PATH=":$HOME/bin"
+PATH+=":$HOME/.local/bin"
 PATH+=":/usr/local/bin:/usr/local/sbin"
+PATH+=":/opt/homebrew/bin:/opt/homebrew/sbin"
 PATH+=":/usr/bin:/usr/sbin"
 PATH+=":/bin:/sbin"
+PATH+=":$PNPM_HOME"
+PATH+=":$HOME/.opencode/bin"
+
+alias python="python3"
+alias pip="pip3"
 
 export PATH
 
-# You may need to manually set your language environment
+eval "$(thefuck --alias)"
+
 export LANG=en_US.UTF-8
 
 echo "---------------"
-echo "  GET 💩  DONE  "
+echo "  GET ⚡️ DONE  "
 echo "---------------"
 
+[ -s "/Users/alopez/.bun/_bun" ] && source "/Users/alopez/.bun/_bun"
+
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
+
+if [ -f '/Users/alopez/Desktop/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/alopez/Desktop/google-cloud-sdk/path.zsh.inc'; fi
+
+if [ -f '/Users/alopez/Desktop/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/alopez/Desktop/google-cloud-sdk/completion.zsh.inc'; fi

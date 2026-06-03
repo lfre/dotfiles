@@ -110,7 +110,7 @@ prompt_git() {
     zstyle ':vcs_info:*' formats ' %u%c'
     zstyle ':vcs_info:*' actionformats ' %u%c'
     vcs_info
-    echo -n "${ref/refs\/heads\//⭠ }${vcs_info_msg_0_%% }${mode}"
+    echo -n "${ref/refs\/heads\// }${vcs_info_msg_0_%% }${mode}"
   fi
 }
 
@@ -149,6 +149,28 @@ prompt_hg() {
   fi
 }
 
+prompt_online() {
+  if [[ -f "$HOME/.offline" ]]; then
+    echo -n "$OFFLINE"
+  else
+    echo -n "$ONLINE"
+  fi
+}
+
+battery_charge() {
+  local battery_script="$HOME/bin/batcharge.py"
+  [[ -x "$battery_script" ]] && "$battery_script"
+}
+
+prompt_right() {
+  local online battery
+  online="$(prompt_online)"
+  battery="$(battery_charge)"
+
+  echo -n "$online"
+  [[ -n "$battery" ]] && echo -n " $battery"
+}
+
 # Dir: current working directory
 prompt_dir() {
   prompt_segment blue black '%~'
@@ -176,6 +198,8 @@ build_prompt() {
   prompt_dir
   prompt_end
 }
+
+RPROMPT='$(prompt_right)'
 
 PROMPT='%{%f%b%k%}$(build_prompt)
 » '

@@ -1,43 +1,52 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 # coding=UTF-8
 # saved to ~/bin/batcharge.py and from
 # http://stevelosh.com/blog/2010/02/my-extravagant-zsh-prompt/#my-right-prompt-battery-capacity
-#!/usr/bin/env python
-# coding=UTF-8
 
-import math, subprocess
-
-p = subprocess.Popen(["ioreg", "-rc", "AppleSmartBattery"], stdout=subprocess.PIPE)
-output = p.communicate()[0]
-
-o_max = [l for l in output.splitlines() if 'MaxCapacity' in l][0]
-o_cur = [l for l in output.splitlines() if 'CurrentCapacity' in l][0]
-
-b_max = float(o_max.rpartition('=')[-1].strip())
-b_cur = float(o_cur.rpartition('=')[-1].strip())
-
-charge = b_cur / b_max
-charge_threshold = int(math.ceil(10 * charge))
-
-# Output
-
-total_slots, slots = 10, []
-filled = int(math.ceil(charge_threshold * (total_slots / 10.0))) * u'◼'
-# old arrow: ▹▸▶
-empty = (total_slots - len(filled)) * u'◻'
-
-out = (filled + empty).encode('utf-8')
+import math
+import re
+import subprocess
 import sys
 
-color_green = '%{[32m%}'
-color_yellow = '%{[33m%}'
-color_red = '%{[31m%}'
-color_reset = '%{[00m%}'
+
+def battery_value(lines, key):
+    pattern = re.compile(r'^\s*"{}"\s*=\s*([0-9.]+)\s*$'.format(re.escape(key)))
+    for line in lines:
+        match = pattern.match(line)
+        if match:
+            return float(match.group(1))
+    return None
+
+
+result = subprocess.run(
+    ["ioreg", "-rc", "AppleSmartBattery"],
+    check=False,
+    stdout=subprocess.PIPE,
+    stderr=subprocess.DEVNULL,
+    text=True,
+)
+
+lines = result.stdout.splitlines()
+b_max = battery_value(lines, "MaxCapacity")
+b_cur = battery_value(lines, "CurrentCapacity")
+
+if not b_max or b_cur is None:
+    sys.exit(0)
+
+charge = max(0.0, min(1.0, b_cur / b_max))
+filled_slots = int(math.ceil(10 * charge))
+
+filled = filled_slots * "◼"
+empty = (10 - filled_slots) * "◻"
+
+color_green = "%{\033[32m%}"
+color_yellow = "%{\033[33m%}"
+color_red = "%{\033[31m%}"
+color_reset = "%{\033[00m%}"
 color_out = (
-    color_green if len(filled) > 6
-    else color_yellow if len(filled) > 3
+    color_green if filled_slots > 6
+    else color_yellow if filled_slots > 3
     else color_red
 )
 
-out = color_out + out + color_reset
-sys.stdout.write(out)
+sys.stdout.write(f"{color_out}{filled}{empty}{color_reset}")
