@@ -1,6 +1,9 @@
+# Sanitized backup of ~/.zshrc — safe to copy/share. Add secrets locally, not here.
+
 export ZSH=$HOME/.oh-my-zsh
 
-ZSH_THEME="agnoster"
+# Custom theme: ~/.oh-my-zsh/custom/themes/agnoster-custom.zsh-theme
+ZSH_THEME="agnoster-custom"
 
 COMPLETION_WAITING_DOTS="true"
 
@@ -9,6 +12,12 @@ plugins=(git npm github you-should-use zsh-syntax-highlighting zsh-autosuggestio
 source $ZSH/oh-my-zsh.sh
 source $HOME/.aliases/base
 source $HOME/.aliases/work
+
+# Secrets: load from 1Password, Keychain, or a private file (e.g. ~/.secrets.zsh), not this backup.
+# export GITHUB_TOKEN=
+# export OPENAI_API_KEY=
+# export CLAUDE_CODE_USE_BEDROCK=1
+# export ANTHROPIC_MODEL=
 
 export N_PREFIX="$HOME/.local"
 export PREFIX="$HOME/.local"
@@ -38,11 +47,11 @@ echo "---------------"
 echo "  GET ⚡️ DONE  "
 echo "---------------"
 
-[ -s "/Users/alopez/.bun/_bun" ] && source "/Users/alopez/.bun/_bun"
+[ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun"
 
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
 
-if [ -f '/Users/alopez/Desktop/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/alopez/Desktop/google-cloud-sdk/path.zsh.inc'; fi
+if [ -f "$HOME/Desktop/google-cloud-sdk/path.zsh.inc" ]; then . "$HOME/Desktop/google-cloud-sdk/path.zsh.inc"; fi
 
-if [ -f '/Users/alopez/Desktop/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/alopez/Desktop/google-cloud-sdk/completion.zsh.inc'; fi
+if [ -f "$HOME/Desktop/google-cloud-sdk/completion.zsh.inc" ]; then . "$HOME/Desktop/google-cloud-sdk/completion.zsh.inc"; fi
