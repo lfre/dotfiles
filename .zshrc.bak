@@ -7,7 +7,7 @@ ZSH_THEME="agnoster-custom"
 
 COMPLETION_WAITING_DOTS="true"
 
-plugins=(git npm github you-should-use zsh-syntax-highlighting zsh-autosuggestions)
+plugins=(git npm gh you-should-use zsh-syntax-highlighting zsh-autosuggestions)
 
 source $ZSH/oh-my-zsh.sh
 source $HOME/.aliases/base
